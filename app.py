@@ -13,6 +13,7 @@ name = "MT"
 app = Flask(__name__)
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 def getip():
    if request.headers.getlist("X-Forwarded-For"):
