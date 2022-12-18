@@ -9,9 +9,6 @@ except:
 import os, random, string, subprocess, traceback
 
 
-
-
-
 keyurl = "/nwkey"
 name = "MT"
 
@@ -19,8 +16,8 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["SSL_CERTIFICATE"] = "path/to/certificate.crt"
-app.config["SSL_KEY"] = "path/to/key.pem"
+app.config["SSL_CERTIFICATE"] = "certificate.pem"
+app.config["SSL_KEY"] = "key.pem"
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 
