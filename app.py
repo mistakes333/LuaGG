@@ -1,6 +1,5 @@
 from flask import *
-from gevent.pywsgi import WSGIServer
-import ssl
+from gevent import from gevent import pywsgi
 from yourapplication import app
 try:
  from dateutil import parser
@@ -10,9 +9,6 @@ except:
  os.system('python3 -m pip install --user Flask==2.1.2')
 
 import os, random, string, subprocess, traceback
-
-ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-ssl_context.load_cert_chain('certificate.pem', 'private_key.pem')
 
 keyurl = "/nwkey"
 name = "MT"
