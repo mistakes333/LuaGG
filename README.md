@@ -4,4 +4,9 @@ Video Guide
 https://youtu.be/7uwpOhNKIjg
 
 
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+openssl genrsa -out private_key.pem 2048
+
+
+
+
+openssl req -new -x509 -key private_key.pem -out certificate.pem -days 365
