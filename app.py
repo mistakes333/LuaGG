@@ -1,6 +1,5 @@
 from flask import *
-from gevent import from gevent import pywsgi
-from yourapplication import app
+from gevent import pywsgi
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
@@ -183,5 +182,5 @@ def hefllox_wxord():
             x1 = x1 + 1
     return f"<h2>Total keys {x1}<br/>"
 
-server = gevent.pywsgi.WSGIServer(('0.0.0.0', 443), application, ssl_context=ssl_context)
+server = pywsgi.WSGIServer(('127.0.0.1', 8443), hello_world, keyfile='server.key', certfile='server.crt')
 server.serve_forever()
