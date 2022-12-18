@@ -4,9 +4,9 @@ Video Guide
 https://youtu.be/7uwpOhNKIjg
 
 
-openssl genrsa -out private.key 2048
+openssl genrsa -out key.pem 2048
 
-openssl req -new -key private.key -out csr.pem
+openssl req -new -x509 -key key.pem -out certificate.pem -days 365
 
 
 export FLASK_RUN_PORT=443
