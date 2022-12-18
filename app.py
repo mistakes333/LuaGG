@@ -1,5 +1,6 @@
 from flask import *
 from gevent.pywsgi import WSGIServer
+import ssl
 from yourapplication import app
 try:
  from dateutil import parser
@@ -10,13 +11,16 @@ except:
 
 import os, random, string, subprocess, traceback
 
+ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+ssl_context.load_cert_chain('certificate.pem', 'private_key.pem')
+
 keyurl = "/nwkey"
 name = "MT"
 
 app = Flask(__name__)
-app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config['PREFERRED_URL_SCHEME'] = 'https'
+#app.config["SESSION_COOKIE_SECURE"] = True
+#app.config["SESSION_COOKIE_HTTPONLY"] = True
+#app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 def getip():
    if request.headers.getlist("X-Forwarded-For"):
@@ -92,8 +96,8 @@ def getexpire(days,seconds):
 
 @app.route('/')
 def hello_world():
-    app.run(ssl_context=('path/to/certificate.crt', 'path/to/private.key'))
-   # //app.run()
+    #app.run(ssl_context=('path/to/certificate.crt', 'path/to/private.key'))
+    app.run()
     xx = request.cookies.get('ip')
     clearr()
     rrip = myip = getip()
@@ -183,5 +187,5 @@ def hefllox_wxord():
             x1 = x1 + 1
     return f"<h2>Total keys {x1}<br/>"
 
-http_server = WSGIServer(('', 5000), app)
-http_server.serve_forever()
+server = gevent.pywsgi.WSGIServer(('0.0.0.0', 443), application, ssl_context=ssl_context)
+server.serve_forever()
