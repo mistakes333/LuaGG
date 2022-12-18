@@ -1,5 +1,6 @@
 from flask import *
-from gevent.pywsgi import WSGIServer
+from gevent.pywsgi
+import ssl
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
@@ -8,6 +9,14 @@ except:
  os.system('python3 -m pip install --user Flask==2.1.2')
 
 import os, random, string, subprocess, traceback
+
+
+
+
+ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+ssl_context.load_cert_chain('certificate.pem', 'key.pem')
+
+
 
 keyurl = "/nwkey"
 name = "MT"
@@ -182,13 +191,6 @@ def hefllox_wxord():
             x1 = x1 + 1
     return f"<h2>Total keys {x1}<br/>"
 
-
-
-with open('path/to/certificate.pem', 'rb') as f:
-    certificate = f.read()
-
-with open('path/to/key.pem', 'rb') as f:
-    key = f.read()
 
 server = WSGIServer(('127.0.0.1', 8000), app, ssl_args=(certificate, key))
 server.serve_forever()
