@@ -4,7 +4,7 @@ try:
  from datetime import datetime, date, timedelta
 except:
  os.system('python3 -m pip install --user python-dateutil==2.8.2')
- os system('python3 -m pip install --user Flask==2.1.2')
+ os.system('python3 -m pip install --user Flask==2.1.2')
 
 import os, random, string, subprocess, traceback
 
