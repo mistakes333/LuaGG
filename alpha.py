@@ -13,7 +13,7 @@ keyurl = "http://13.58.115.54:8000/nwkey"
 name = "MT"
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'your-secret-key'
 
 
 def getip():
