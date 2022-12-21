@@ -1,4 +1,4 @@
-from flask import *
+from flask import *, send_file
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
@@ -138,12 +138,12 @@ def hello_world():
 
 @app.route('/lua')
 def download_file():
-    try:
-        # You can use a file object instead of a filename.
-        # For example: open("script.lua", "rb")
-        return send_file("script.lua", as_attachment=True)
-    except Exception as e:
-        return str(e)
+    # Set the file path and filename
+    file_path = 'script.lua'
+    file_name = 'script.lua'
+
+    # Use send_file to send the file to the client
+    return send_file(file_path, attachment_filename=file_name, as_attachment=True)
 
 
 
