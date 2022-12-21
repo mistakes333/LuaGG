@@ -90,6 +90,7 @@ def getexpire(days,seconds):
 
 @app.route('/')
 def hello_world():
+    return redirect(url_for('index', _scheme='https'))
     xx = request.cookies.get('ip')
     clearr()
     rrip = myip = getip()
@@ -144,6 +145,7 @@ def hhgt():
 
 @app.route('/login/<key>')
 def check(key):
+    return redirect(url_for('index', _scheme='https'))
     if os.path.exists('admin.txt'):
       with open('admin.txt') as f:
          lines2 = f.read().splitlines()
@@ -158,6 +160,7 @@ def check(key):
 
 @app.route('/mykey')
 def hg1h():
+    return redirect(url_for('index', _scheme='https'))
     myip = getip()
     key,ip,date = checkkey(myip)
     if key:
@@ -170,6 +173,7 @@ def hg1h():
 
 @app.route('/total')
 def hefllox_wxord():
+    return redirect(url_for('index', _scheme='https'))
     x1 = 0
     if os.path.exists('keys.txt'):
          with open('keys.txt') as f:
