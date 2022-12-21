@@ -6,10 +6,9 @@ except:
  os.system('python3 -m pip install --user python-dateutil==2.8.2')
  os.system('python3 -m pip install --user Flask==2.1.2')
 
-import os, random, string, subprocess, traceback, sockets, ssl, request, sqlite3, smtplib, json, session
+import os, random, string, subprocess, traceback
 
-with open("users.json") as f:
-    users = json.load(f)
+
 
 keyurl = "http://13.58.115.54:8000/nwkey"
 name = "MT"
@@ -196,52 +195,6 @@ def hefllox_wxord():
     return f"<h2>Total keys {x1}<br/>"
 
 
-
-
-
-
-@app.route("/register", methods=["POST"])
-def register():
-    # Accept user input for the email, username, and password
-    email = request.form["email"]
-    username = request.form["username"]
-    password = request.form["password"]
-
-    # Add the new user to the JSON database
-    users[email] = {
-        "username": username,
-        "password": password,
-    }
-
-    # Save the updated JSON database to the file
-    with open("users.json", "w") as f:
-        json.dump(users, f)
-
-    return "ลงทะเบียนผู้ใช้สำเร็จ"
-
-@app.route("/login", methods=["POST"])
-def login():
-	   session.permanent = True
-app.permanent_session_lifetime = timedelta(minutes=30)
-    # Accept user input for the email and password
-    email = request.form["email"]
-    password = request.form["password"]
-
-    # Verify the email and password against the stored credentials
-    if email in users and users[email]["password"] == password:
-        # Create a SOCKS connection
-        socks_conn = socks.socksocket()
-
-        # Wrap the SOCKS connection in an SSL/TLS context
-        ssl_conn = ssl.wrap_socket(socks_conn, ssl_version=ssl.PROTOCOL_TLSv1)
-
-        # Send and receive chat messages using the SSL/TLS-wrapped SOCKS connection
-        message = request.form["message"]
-        ssl_conn.send(message.encode())
-        response = ssl_conn.recv(1024).decode()
-        return response
-    else:
-        return "อีเมลหรือรหัสผ่านไม่ถูกต้อง"
 
 if __name__ == "__main__":
     app.run()
