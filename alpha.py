@@ -8,6 +8,8 @@ except:
 
 import os, random, string, subprocess, traceback, sockets, ssl, request, sqlite3, smtplib, json, session
 
+with open("users.json") as f:
+    users = json.load(f)
 
 keyurl = "http://13.58.115.54:8000/nwkey"
 name = "MT"
@@ -198,12 +200,6 @@ def hefllox_wxord():
 
 
 
-
-
-# Load the JSON database file into memory
-with open("users.json") as f:
-    users = json.load(f)
-
 @app.route("/register", methods=["POST"])
 def register():
     # Accept user input for the email, username, and password
@@ -225,9 +221,8 @@ def register():
 
 @app.route("/login", methods=["POST"])
 def login():
-    session.permanent = True
+	   session.permanent = True
 app.permanent_session_lifetime = timedelta(minutes=30)
-redirect(url_for('http://13.58.115.54:8000/login'))
     # Accept user input for the email and password
     email = request.form["email"]
     password = request.form["password"]
