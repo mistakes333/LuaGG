@@ -1,4 +1,5 @@
-from flask import *
+from flask import url_for, redirect, *
+
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
