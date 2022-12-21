@@ -13,7 +13,7 @@ keyurl = "http://13.58.115.54:8000/nwkey"
 name = "MT"
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SECRET_KEY'] = 'secret!Mistakes333'
 
 
 def getip():
@@ -131,19 +131,6 @@ def hello_world():
     resp.set_cookie('ip', key, max_age=90 * 60 * 60 * 24)
     return resp
 
-@app.route("/chat", methods=["POST"])
-def chat():
-    # Create a SOCKS connection
-    socks_conn = socks.socksocket()
-
-    # Wrap the SOCKS connection in an SSL/TLS context
-    ssl_conn = ssl.wrap_socket(socks_conn, ssl_version=ssl.PROTOCOL_TLSv1)
-
-    # Send and receive chat messages using the SSL/TLS-wrapped SOCKS connection
-    message = request.form["message"]
-    ssl_conn.send(message.encode())
-    response = ssl_conn.recv(1024).decode()
-    return response
 
 
 @app.route('/nwkey')
@@ -196,4 +183,4 @@ def hefllox_wxord():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=8080, debug=True)
