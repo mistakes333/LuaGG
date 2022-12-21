@@ -1,4 +1,4 @@
-from flask import *, send_from_directory
+from flask import *
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
@@ -6,10 +6,7 @@ except:
  os.system('python3 -m pip install --user python-dateutil==2.8.2')
  os.system('python3 -m pip install --user Flask==2.1.2')
 
-import os, random, string, subprocess, traceback
-
-
-
+import os, random, string, subprocess, traceback, sockets, ssl, request
 
 
 keyurl = "http://13.58.115.54:8000/nwkey"
@@ -134,14 +131,19 @@ def hello_world():
     resp.set_cookie('ip', key, max_age=90 * 60 * 60 * 24)
     return resp
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    # Create a SOCKS connection
+    socks_conn = socks.socksocket()
 
-@app.route('/dl/<path:filename>')
-def download_file(filename):
-    # Set the directory from which the file will be served
-    directory = '/script'
+    # Wrap the SOCKS connection in an SSL/TLS context
+    ssl_conn = ssl.wrap_socket(socks_conn, ssl_version=ssl.PROTOCOL_TLSv1)
 
-    # Use send_from_directory to send the file to the client
-    return send_from_directory(directory, filename, as_attachment=True)
+    # Send and receive chat messages using the SSL/TLS-wrapped SOCKS connection
+    message = request.form["message"]
+    ssl_conn.send(message.encode())
+    response = ssl_conn.recv(1024).decode()
+    return response
 
 
 @app.route('/nwkey')
