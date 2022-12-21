@@ -17,11 +17,6 @@ name = "MT"
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["SSL_CERTIFICATE"] = "certificate.crt"
-app.config["SSL_KEY"] = "key.pem"
-app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 
 
@@ -201,4 +196,4 @@ def hefllox_wxord():
 
 
 if __name__ == "__main__":
-    app.run(port=443, ssl_context="adhoc")
+    app.run(port=443)
