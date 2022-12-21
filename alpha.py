@@ -1,4 +1,4 @@
-from flask import *, send_file
+from flask import *, send_from_directory
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
@@ -12,11 +12,10 @@ import os, random, string, subprocess, traceback
 
 
 
-keyurl = "/nwkey"
+keyurl = "http://13.58.115.54:8000/nwkey"
 name = "MT"
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 
 
 
@@ -136,15 +135,13 @@ def hello_world():
     return resp
 
 
-@app.route('/lua')
-def download_file():
-    # Set the file path and filename
-    file_path = 'script.lua'
-    file_name = 'script.lua'
+@app.route('/dl/<path:filename>')
+def download_file(filename):
+    # Set the directory from which the file will be served
+    directory = '/script'
 
-    # Use send_file to send the file to the client
-    return send_file(file_path, attachment_filename=file_name, as_attachment=True)
-
+    # Use send_from_directory to send the file to the client
+    return send_from_directory(directory, filename, as_attachment=True)
 
 
 @app.route('/nwkey')
@@ -196,4 +193,4 @@ def hefllox_wxord():
 
 
 if __name__ == "__main__":
-    app.run(port=443)
+    app.run()
