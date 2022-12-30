@@ -1,20 +1,18 @@
-from flask import url_for, redirect, *
-
+from flask import *
 try:
  from dateutil import parser
  from datetime import datetime, date, timedelta
 except:
- os.system('pip install --user python-dateutil==2.8.2 Flask==2.2.2')
+ os.system('pip install -U python-dateutil==2.8.2 Flask==2.2.2')
 
-import os, random, string, subprocess, traceback
+import os, random, string, subprocess, traceback, jsonify
 
 
 
-keyurl = "http://13.58.115.54:8000/nwkey"
+keyurl = "http://10.193.182.97:5000/nwkey"
 name = "MT"
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!Mistakes333'
 
 
 def getip():
@@ -91,7 +89,6 @@ def getexpire(days,seconds):
 
 @app.route('/')
 def hello_world():
-    return redirect(url_for('index', _scheme='https'))
     xx = request.cookies.get('ip')
     clearr()
     rrip = myip = getip()
@@ -146,14 +143,13 @@ def hhgt():
 
 @app.route('/login/<key>')
 def check(key):
-    return redirect(url_for('index', _scheme='https'))
     if os.path.exists('admin.txt'):
       with open('admin.txt') as f:
          lines2 = f.read().splitlines()
       if key in lines2:
          return "true"
     myip = getip()
-    key,ip,date = checkkey(key,ip=False)
+    key,ip,date = checkkey(key,ip=True)
     if key and (myip == ip):
        return "true"
     return "false"
@@ -161,7 +157,6 @@ def check(key):
 
 @app.route('/mykey')
 def hg1h():
-    return redirect(url_for('index', _scheme='https'))
     myip = getip()
     key,ip,date = checkkey(myip)
     if key:
@@ -174,7 +169,6 @@ def hg1h():
 
 @app.route('/total')
 def hefllox_wxord():
-    return redirect(url_for('index', _scheme='https'))
     x1 = 0
     if os.path.exists('keys.txt'):
          with open('keys.txt') as f:
@@ -185,7 +179,5 @@ def hefllox_wxord():
             x1 = x1 + 1
     return f"<h2>Total keys {x1}<br/>"
 
-
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True, ssl_context=('/path/to/certificate.crt', '/path/to/private.key'))
+    app.run(host='0.0.0.0', port=5000, debug=True)
