@@ -1,11 +1,7 @@
 from flask import *
 import os, random, string, subprocess, traceback
-try:
- from dateutil import parser
- from datetime import datetime, date, timedelta
-except:
- ##os.system('pip install -U python-dateutil==2.8.2 Flask==2.2.2')
-
+from dateutil import parser
+from datetime import datetime, date, timedelta
 
 
 
