@@ -3,7 +3,7 @@ import os, random, string, subprocess, traceback
 from datetime import datetime, date, timedelta
 from dateutil import parser
 
-keyurl = "/nwkey"
+keyurl = "https://FlaskLuaGG.mistakesclub.repl.co/nwkey"
 name = "GH"
 app = Flask(__name__)
 
