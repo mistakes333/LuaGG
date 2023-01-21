@@ -14,6 +14,8 @@ pip install -r requirements.txt
 ```sh
 python app.py
 ```
+## fork replit
+https://replit.com/@MistakesClub/FlaskLuaGG?v=1
 ## original
 Online login System
 Video Guide
