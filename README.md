@@ -1,9 +1,9 @@
 # Lua-GG
 
 ### edit in app.py
-* app.js
+* app.py
 ```py
-keyurl = "https://alpha.mistakesclub.repl.co/nwkey" #// You must enter your own url followed by /nwkey
+keyurl = "https://FlaskLuaGG.mistakesclub.repl.co/nwkey" #// You must enter your own url followed by /nwkey
 name = "GH" #// Freely set the key name.
 ```
 * Install requirements.txt
