@@ -1,26 +1,11 @@
 from flask import *
-try:
- from dateutil import parser
- from datetime import datetime, date, timedelta
-except:
- os.system('python3 -m pip install --user python-dateutil==2.8.2')
- os.system('python3 -m pip install --user Flask==2.1.2')
-
 import os, random, string, subprocess, traceback
-
+from datetime import datetime, date, timedelta
+from dateutil import parser
 
 keyurl = "/nwkey"
-name = "MT"
-
+name = "GH"
 app = Flask(__name__)
-app.config['DEBUG'] = True
-app.config["SESSION_COOKIE_SECURE"] = True
-app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["SSL_CERTIFICATE"] = "certificate.pem"
-app.config["SSL_KEY"] = "key.pem"
-app.config['PREFERRED_URL_SCHEME'] = 'https'
-
-
 
 def getip():
    if request.headers.getlist("X-Forwarded-For"):
@@ -28,7 +13,6 @@ def getip():
    else:
       ip = request.remote_addr
    return str(ip)
-
 
 def checkkey(ip_or_key, **args):
     ip = key = date =  None
@@ -46,7 +30,6 @@ def checkkey(ip_or_key, **args):
             date = x1[2]
             break
     return key,ip,date
-
 
 def clearr():
  try:
@@ -85,14 +68,11 @@ def createkey():
          a_file.write(f"\n{key};{myip};{date}")
     return key,myip,date
 
-
 def getexpire(days,seconds):
    hours = 23-(days * 24 + seconds // 3600)
    minutes = 60-((seconds % 3600) // 60)
    seconds = 60-(seconds % 60)
    return hours, minutes, seconds
-
-
 
 @app.route('/')
 def hello_world():
@@ -137,7 +117,6 @@ def hello_world():
     resp.set_cookie('ip', key, max_age=90 * 60 * 60 * 24)
     return resp
 
-
 @app.route('/nwkey')
 def hhgt():
     ip = getip()
@@ -145,7 +124,6 @@ def hhgt():
     if not key:
        createkey()
     return redirect('/')
-
 
 @app.route('/login/<key>')
 def check(key):
@@ -160,7 +138,6 @@ def check(key):
        return "true"
     return "false"
 
-
 @app.route('/mykey')
 def hg1h():
     myip = getip()
@@ -169,9 +146,6 @@ def hg1h():
        return key
     else:
         return ""
-
-
-
 
 @app.route('/total')
 def hefllox_wxord():
@@ -187,4 +161,4 @@ def hefllox_wxord():
 
 
 if __name__ == "__main__":
-    app.run(port=443, ssl_context="adhoc")
+    app.run(host='0.0.0.0', port=5000, debug=False)
