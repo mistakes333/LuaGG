@@ -1,4 +1,4 @@
-server = "your website"
+server = "https://FlaskLuaGG.mistakesclub.repl.co/"
 
 c = gg.makeRequest(server.."/mykey").content
 
